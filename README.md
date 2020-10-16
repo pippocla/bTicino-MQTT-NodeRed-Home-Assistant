@@ -27,7 +27,7 @@ where
 
 >**"idx":** unique ID of light
 
-for each light you have to change the 3 idx values, in the example number 15 in 
+add one of this block code for each light you want to create, and change the 3 idx values (in the example number 15) in 
 
 >**command_on_template**
 
@@ -35,7 +35,7 @@ for each light you have to change the 3 idx values, in the example number 15 in
 
 >**state_template**
 
-Create one for each light do you want to add to HA
+No rules for the idx value, but I suggest to use the same number set on the hardware during the installation of the system
 
 
 **SWITCH**
@@ -65,7 +65,7 @@ where
 
 >**"idx":** unique ID of switch
 
-for each switch you have to change the 3 idx values, in the example number 81 in 
+add one of this block code, for each switch you want to create and change the 3 idx values (in the example number 81) in 
 
 >**payload_on:**
 
@@ -73,6 +73,7 @@ for each switch you have to change the 3 idx values, in the example number 81 in
 
 >**value_template:**
 
+No rules for the idx value, but I suggest to use the same number set on the hardware during the installation of the system
 
 **SENSOR**
 
@@ -101,12 +102,13 @@ The following data is currently integrated:
   state_topic: "bticino/sensor/t11"
   value_template: '{{value_json.nvalue }}'
   ```
-this will create a sensor for Temperature value
+this will create a sensor for Temperature value,
+
 for each point you want to create change
 
 >**state_topic:** the number at the end bticino/sensor/t**xx**
 
-the value you use could be the one you want no rule, but I suggest to use same number used to configure the hardware during installation of the plant
+the value you use could be the one you want no rules, but I suggest to use same number used to configure the hardware during installation of the plant
 
 ```
 - platform: mqtt
@@ -133,6 +135,7 @@ the value you use could be the one you want no rule, but I suggest to use same n
 this will create a sensor for the offset Temperature value
 
 >**state_topic:** the number at the end bticino/sensor/offsett**xx**
+
 the value you use could be the one you want no rule, but I suggest to use same number used to configure the hardware during installation of the plant
 
 add under switch this code
@@ -157,7 +160,7 @@ for each point you want to create change
 the value you use could be the one you want no rule, but I suggest to use same number used to configure the hardware during installation of the plant
 
 Finally, let's add an input_boolean that will be activated by an automation every time HA starts up.
-In this way, all the lights and thermostats will be interogated and their status updated
+In this way, all the lights and thermostats will be interogated and their start status updated
 
 To do this add in config.yaml
 
@@ -188,3 +191,7 @@ and in automations.yaml
  ```
  
  
+**NodeRed**
+
+In NodeRed are present two flow, one is for command session, and is used to send command to the gateway, one is for event session, and read continuosly the event from gateway for update state off all light, value from sensor and state of switch.
+
