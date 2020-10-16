@@ -4,7 +4,7 @@ Install NodeRed
 
 Install Mosquito
 
-**LIGHT
+**LIGHT**
 
 Open config.yaml and under light add this code:
 
@@ -29,16 +29,16 @@ where
 
 for each light you have to change the 3 idx values, in the example number 15 in 
 
->**command_on_template, 
+>**command_on_template**
 
->**command_off_template,
+>**command_off_template**
 
->**state_template
+>**state_template**
 
 Create one for each light do you want to add to HA
 
 
-**SWITCH
+**SWITCH**
 
 Under switch add this code:
 
@@ -67,14 +67,14 @@ where
 
 for each switch you have to change the 3 idx values, in the example number 81 in 
 
->**payload_on:
+>**payload_on:**
 
->**payload_off:
+>**payload_off:**
 
->**value_template:
+>**value_template:**
 
 
-**SENSOR
+**SENSOR**
 
 Under sensor add this code
 
@@ -156,3 +156,35 @@ for each point you want to create change
 
 the value you use could be the one you want no rule, but I suggest to use same number used to configure the hardware during installation of the plant
 
+Finally, let's add an input_boolean that will be activated by an automation every time HA starts up.
+In this way, all the lights and thermostats will be interogated and their status updated
+
+To do this add in config.yaml
+
+```
+
+input_boolean:
+  updatebticino:
+    name: Update bTicino
+    initial: off
+```
+and in automations.yaml
+
+```
+- alias: 'bTicino MQTT Start'
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: [ ]
+  action:
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.updatebticino
+  - delay:
+      minutes: 1
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.updatebticino
+ ```
+ 
+ 
