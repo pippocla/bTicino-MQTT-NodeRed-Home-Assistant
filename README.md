@@ -193,5 +193,11 @@ and in automations.yaml
  
 **NodeRed**
 
-In NodeRed are present two flow, one is for command session, and is used to send command to the gateway, one is for event session, and read continuosly the event from gateway for update state off all light, value from sensor and state of switch.
+In NodeRed are present two flow, one is for command session **bTicino CMD**, and is used to send command to the gateway, one is for event session **bTicino EVENT**, and read continuosly the event from gateway for update state off all light, value from sensor and state of switch.....
+
+See attached NodeRed Setup.pdf
+
+
+
+
 
